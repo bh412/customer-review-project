@@ -1,57 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import './scss/App.scss';
+import {useAppSelector} from "./app/hooks";
+import {selectReviews} from "./features/review/reviewSlice";
+import {ReviewChart} from "./app/ReviewChart";
+import { Col, Row } from './app/Utils';
+import {ReviewCardProps} from "./app/constants";
+import {ReviewInput} from "./app/ReviewInput";
+import {ReviewStack} from "./app/ReviewStack";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    const [review, setReview] = useState<ReviewCardProps>({name: "", email: "", rating: -1, comment: ""});
+    const [ratings, setRatings] = useState<number[]>([]);
+    const [avgRating, setAvgRating] = useState<number | null>(-1);
+    const reducerReviews = useAppSelector(selectReviews);
+
+    useEffect(() => {
+        const tempArray = [0,0,0,0,0];
+        let tempAvg = 0;
+        // @ts-ignore
+        reducerReviews.forEach((review: ReviewCardProps) => tempArray[review.rating - 1] += 1);
+        tempArray.forEach((index, item) => tempAvg += (index + 1) * item);
+        setRatings(tempArray);
+        setAvgRating(Math.round((tempAvg / 5) * 10) / 10);
+    }, [reducerReviews]);
+
+    return (
+        <div className="App">
+            <div className="content-card">
+                <Row>
+                    <Col>
+                        <ReviewInput review={review} setReview={setReview}/>
+                    </Col>
+                    <Col>
+                        <ReviewChart ratings={ratings} avgRating={avgRating}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <ReviewStack reducerReviews={reducerReviews}/>
+                </Row>
+                <div className="bottom-margin"/>
+            </div>
+        </div>
   );
 }
 
