@@ -9,25 +9,25 @@ describe('review reducer', () => {
       name: "Ben",
       rating: 3,
       comment: "It's alright",
-      email: "blah@gmail.com"
+      email: "ben@gmail.com"
     },
     {
       name: "Bob",
       rating: 4,
       comment: "It's a decent product",
-      email: "blah@gmail.com"
+      email: "bob@gmail.com"
     },
     {
-      name: "Turtle boy",
+      name: "Noa",
       rating: 5,
       comment: "It's what I need",
-      email: "blah@gmail.com"
+      email: "noa@gmail.com"
     },
     {
-      name: "Angry man",
+      name: "Angry customer",
       rating: 1,
       comment: "It's rubbish",
-      email: "blah@gmail.com"
+      email: "angry@gmail.com"
     },
   ]
 
@@ -46,10 +46,10 @@ describe('review reducer', () => {
         email: "bob@gmail.com"
       },
       {
-        name: "Nia",
+        name: "Noa",
         rating: 5,
         comment: "It's what I need",
-        email: "nia@gmail.com"
+        email: "noa@gmail.com"
       },
       {
         name: "Angry customer",
@@ -81,10 +81,10 @@ describe('review reducer', () => {
         email: "bob@gmail.com"
       },
       {
-        name: "Nia",
+        name: "Noa",
         rating: 5,
         comment: "It's what I need",
-        email: "nia@gmail.com"
+        email: "noa@gmail.com"
       },
       {
         name: "Angry customer",

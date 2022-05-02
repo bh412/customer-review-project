@@ -16,10 +16,10 @@ const initialState: ReviewCardProps[] = [
     email: "bob@gmail.com"
   },
   {
-    name: "Nia",
+    name: "Noa",
     rating: 5,
     comment: "It's what I need",
-    email: "nia@gmail.com"
+    email: "noa@gmail.com"
   },
   {
     name: "Angry customer",
